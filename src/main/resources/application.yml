@@ -1,0 +1,29 @@
+# run --- docker ps | grep mongo | sed 's/.*://;s/->27017.*//' --- to get necessary mongodb port in case running in standard docker
+spring:
+  data:
+    mongodb:
+      port: 27017
+      database: resource
+
+# to safely tell Spring Data MongoDB to scan a different root package by type if your project layout has multiple projects and its not finding your repositories.
+# basePackageClasses=MyRepository.class
+
+server:
+  servlet:
+    contextPath: /resource-services
+
+security:
+  oauth2:
+    client:
+      client-id: spring_boot_resource_service
+      client-secret: 222
+      grant-type: client_credentials
+      access-token-uri: http://<YOUR_IP>:9999/oauth/token
+
+rest:
+  api:
+    auth-service-path: http://<YOUR_IP>:9999
+
+management:
+  server:
+    port: 8081

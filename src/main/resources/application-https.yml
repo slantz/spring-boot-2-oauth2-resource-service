@@ -1,0 +1,8 @@
+# This property file is only activated when the app is run when SPRING_PROFILES_ACTIVE configured with profile https.
+# Configure the server to run with SSL/TLS and using HTTPS
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:tomcat.keystore
+    key-store-password: password
+    key-password: password
