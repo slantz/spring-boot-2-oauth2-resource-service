@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        JAR_FILE: ./build/libs/spring-boot-resource-service-1.1.0.jar
+        JAR_FILE: ./build/libs/spring-boot-resource-service-1.0.0-SNAPSHOT.jar
     image: your-docker-repo/spring-boot-resource-service
     ports:
       - 8080:8080

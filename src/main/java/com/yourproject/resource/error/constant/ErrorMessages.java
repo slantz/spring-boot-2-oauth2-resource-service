@@ -6,7 +6,7 @@ public final class ErrorMessages {
 
     public static final class CurrencyMessages {
 
-        public static final String NO_ELEMENT_BY_ID_EXCEPTION_MESSAGE = "suka";
-        public static final String NO_ELEMENT_BY_SPENDER_USERNAME_EXCEPTION_MESSAGE = "suka pizdec nothing found by spender username";
+        public static final String NO_ELEMENT_BY_FIELD_EXCEPTION_MESSAGE = "no for field: %s";
+        public static final String NO_ELEMENT_BY_USERNAME_EXCEPTION_MESSAGE = "suka pizdec nothing found by spender username";
     }
 }

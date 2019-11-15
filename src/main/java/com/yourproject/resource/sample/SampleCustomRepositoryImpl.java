@@ -17,12 +17,12 @@ public class SampleCustomRepositoryImpl implements SampleCustomRepository {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public List<Sample> findByUsernameAndDateAndCurrencyTitle(String username, Date startDate, Date endDate, String currencyTitle) {
-        List<Sample> expensesByDates = this.mongoTemplate.find(query(where("spenderUsername").is(username).andOperator(where("date").gte(startDate).andOperator(where("date").lte(endDate)))), Sample.class);
+    public List<Sample> findByUsernameAndDateAndCurrencyTitle(String username, Date startDate, Date endDate, String currencyCode) {
+        List<Sample> expensesByDates = this.mongoTemplate.find(query(where("username").is(username).andOperator(where("date").gte(startDate).andOperator(where("date").lte(endDate)))), Sample.class);
 
         return expensesByDates
                 .stream()
-                .filter(expense -> expense.getCurrency().getTitle().equals(currencyTitle))
+                .filter(expense -> expense.getCurrency().getCode().equals(currencyCode))
                 .collect(Collectors.toList());
     }
 }

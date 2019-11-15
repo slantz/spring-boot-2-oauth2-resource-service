@@ -15,7 +15,7 @@ public class Currency {
 
     @Indexed(unique = true)
     @JsonProperty
-    private String title;
+    private String code;
 
     @Indexed(unique = true)
     @JsonProperty
@@ -23,8 +23,8 @@ public class Currency {
 
     private Currency() {}
 
-    public Currency(String title, String symbol) {
-        this.title = title;
+    public Currency(String code, String symbol) {
+        this.code = code;
         this.symbol = symbol;
     }
 
@@ -40,7 +40,7 @@ public class Currency {
         return this.symbol;
     }
 
-    public String getTitle() {
-        return this.title;
+    public String getCode() {
+        return this.code;
     }
 }

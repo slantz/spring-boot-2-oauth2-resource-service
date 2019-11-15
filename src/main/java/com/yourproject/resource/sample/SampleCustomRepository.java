@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SampleCustomRepository {
 
-    List<Sample> findByUsernameAndDateAndCurrencyTitle(String username, Date startDate, Date endDate, String currencyTitle);
+    List<Sample> findByUsernameAndDateAndCurrencyTitle(String username, Date startDate, Date endDate, String currencyCode);
 }
