@@ -63,7 +63,7 @@ dependencies {
 
 docker {
     dependsOn build
-    name "kblnsk/${bootJar.baseName}"
+    name "your-docker-repo/${bootJar.baseName}"
     files bootJar.archivePath
     buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
 }

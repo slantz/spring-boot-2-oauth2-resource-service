@@ -2,20 +2,28 @@ package com.yourproject.resource.sample;
 
 import com.yourproject.resource.currency.CurrencyService;
 import com.yourproject.resource.error.MissingDbModelInstanceException;
+import com.yourproject.resource.model.adjust.Authority;
 import com.yourproject.resource.model.mongo.Currency;
 import com.yourproject.resource.model.mongo.Sample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static com.yourproject.resource.error.constant.ErrorMessages.CurrencyMessages.NO_ELEMENT_BY_FIELD_EXCEPTION_MESSAGE;
+import static com.yourproject.resource.error.constant.ErrorMessages.CurrencyMessages
+        .NO_ELEMENT_BY_NAME_AND_DATE_EXCEPTION_MESSAGE;
+import static com.yourproject.resource.error.constant.ErrorMessages.CurrencyMessages
+        .NO_ELEMENT_BY_NAME_AND_INCLUSIVE_DATES_EXCEPTION_MESSAGE;
+import static com.yourproject.resource.error.constant.ErrorMessages.CurrencyMessages
+        .NO_ELEMENT_BY_NAME_AND_OVERLAPPING_DATES_EXCEPTION_MESSAGE;
 import static com.yourproject.resource.error.constant.ErrorMessages.CurrencyMessages.NO_ELEMENT_BY_USERNAME_EXCEPTION_MESSAGE;
 
 @Service("sampleService")
@@ -39,15 +47,39 @@ public class SampleServiceImpl implements SampleService {
     }
 
     @Override
-    public List<GrantedAuthority> getUsernameAuthorities(String username) {
-        ResponseEntity<List<GrantedAuthority>> response =
-                restTemplate
-                        .exchange(this.authServiceApiUrl + "/users/username/" + username + "/authorities",
-                                  HttpMethod.GET,
-                                  null,
-                                  new ParameterizedTypeReference<List<GrantedAuthority>>() {});
+    public List<Sample> getSamplesByUsernameAndPreciseDate(String username, Date date) {
+        return this.sampleRepository.findByUsernameAndPreciseDate(username, date).orElseThrow(() -> new NoSuchElementException(NO_ELEMENT_BY_NAME_AND_DATE_EXCEPTION_MESSAGE));
+    }
 
-        return null;
+    @Override
+    public List<Sample> getSamplesByInclusiveDateRangeAndUsername(String username, Date startDate, Date expiredDate) {
+        return this.sampleRepository.findByInclusiveDateRangeAndUsername(username, startDate, expiredDate).orElseThrow(() -> new NoSuchElementException(NO_ELEMENT_BY_NAME_AND_INCLUSIVE_DATES_EXCEPTION_MESSAGE));
+    }
+
+    @Override
+    public List<Sample> getSamplesByOverlappingDateRangeAndUsername(String username, Date startDate, Date expiredDate) {
+        return this.sampleRepository.findByOverlappingDateRangeAndUsername(username, startDate, expiredDate).orElseThrow(() -> new NoSuchElementException(NO_ELEMENT_BY_NAME_AND_OVERLAPPING_DATES_EXCEPTION_MESSAGE));
+    }
+
+    @Override
+    public List<Sample> getSamplesByTitle(String username, String title) {
+        return this.sampleRepository.findByUsernameAndTitle(username, title).orElseThrow(() -> new NoSuchElementException(String.format(NO_ELEMENT_BY_FIELD_EXCEPTION_MESSAGE, "title")));
+    }
+
+    @Override
+    public List<Sample> getSamplesByUsernameAndDateAndCurrencyCode(String username, Date startDate, Date expiredDate, String currencyCode) {
+        return this.sampleRepository.findByUsernameAndDateAndCurrencyCode(username, startDate, expiredDate, currencyCode);
+    }
+
+    @Override
+    public List<Authority> getUsernameAuthorities(String username) {
+        return restTemplate
+                .exchange(this.authServiceApiUrl + "/users/username/" + username + "/authorities",
+                          HttpMethod.GET,
+                          null,
+                          new ParameterizedTypeReference<List<Authority>>() {
+                          })
+                .getBody();
     }
 
     private Currency getExistingCurrency(Currency currency) {

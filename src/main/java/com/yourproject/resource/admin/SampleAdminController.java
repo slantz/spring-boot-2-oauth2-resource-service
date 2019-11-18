@@ -1,6 +1,7 @@
 package com.yourproject.resource.admin;
 
 import com.yourproject.resource.constant.AuthorizationGrant;
+import com.yourproject.resource.model.adjust.Authority;
 import com.yourproject.resource.model.mongo.Sample;
 import com.yourproject.resource.sample.SampleService;
 import org.slf4j.Logger;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +33,7 @@ public class SampleAdminController {
     }
 
     @GetMapping(path = "/{username}/authorities")
-    public ResponseEntity<List<GrantedAuthority>> getUsernameAuthorities(@PathVariable String username) {
+    public ResponseEntity<List<Authority>> getUsernameAuthorities(@PathVariable String username) {
         return new ResponseEntity<>(this.sampleService.getUsernameAuthorities(username), HttpStatus.OK);
     }
 }

@@ -12,6 +12,8 @@ public interface SampleRepository extends MongoRepository<Sample, String>, Sampl
 
     Optional<List<Sample>> findByUsername(String username);
 
+    Optional<List<Sample>> findByUsernameAndTitle(String username, String title);
+
     /**
         S'E'
         |-|

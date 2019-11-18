@@ -15,6 +15,7 @@ services:
       - spring.data.mongodb.port=27017
       - spring.data.mongodb.database=resource
       - rest.api.auth-service-path=http://auth-service:9999
+      - security.oauth2.client.access-token-uri=http://auth-service:9999/oauth/token
     links:
       - mongo
       - auth-service
@@ -25,7 +26,7 @@ services:
       - sb2o.spring-boot-resource-service
 
   auth-service:
-    image: your-docker-repo/spring-boot-auth-service
+    image: your-docker-repo/spring-boot-auth-service:latest
     ports:
       - 9999:9999
       - 8082:8081
@@ -35,10 +36,8 @@ services:
        - spring.data.mongodb.database=auth
     links:
       - mongo
-      - auth-service
     depends_on:
       - mongo
-      - auth-service
     labels:
       - sb2o.spring-boot-auth-service
 

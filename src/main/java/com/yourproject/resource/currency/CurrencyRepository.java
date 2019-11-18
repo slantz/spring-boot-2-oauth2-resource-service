@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface CurrencyRepository extends MongoRepository<Currency, String> {
 
-    public Optional<Currency> findByCode(String code);
+    Optional<Currency> findByCode(String code);
 }
