@@ -81,6 +81,16 @@ public class SampleServiceImpl implements SampleService {
                 .getBody();
     }
 
+    @Override
+    public List<Sample> create(List<Sample> samples) {
+        return this.sampleRepository.saveAll(samples);
+    }
+
+    @Override
+    public List<Sample> get() {
+        return this.sampleRepository.findAll();
+    }
+
     private Currency getExistingCurrency(Currency currency) {
         String currencyCode = currency.getCode();
         Currency existingCurrency;

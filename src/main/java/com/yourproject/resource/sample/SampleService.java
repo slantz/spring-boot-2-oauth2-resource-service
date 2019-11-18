@@ -21,4 +21,8 @@ public interface SampleService {
     List<Sample> getSamplesByUsernameAndDateAndCurrencyCode(String username, Date startDate, Date expiredDate, String currencyCode);
 
     List<Authority> getUsernameAuthorities(String username);
+
+    List<Sample> create(List<Sample> samples);
+
+    List<Sample> get();
 }
