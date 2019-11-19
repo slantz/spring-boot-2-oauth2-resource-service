@@ -1,4 +1,4 @@
-package com.yourproject.resource.model.response;
+package com.yourproject.resource.error.response;
 
 import org.springframework.http.HttpStatus;
 

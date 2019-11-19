@@ -52,7 +52,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.security.oauth:spring-security-oauth2:2.3.0.RELEASE')
     compile('org.springframework.security:spring-security-jwt:1.0.9.RELEASE')
-    compile('org.springframework.hateoas:spring-hateoas')
     compile('org.springframework.boot:spring-boot-starter-actuator')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
