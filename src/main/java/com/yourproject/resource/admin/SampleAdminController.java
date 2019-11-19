@@ -27,6 +27,11 @@ public class SampleAdminController {
     @Autowired
     private SampleService sampleService;
 
+    @GetMapping(path = "/samples")
+    public ResponseEntity<List<Sample>> getSamples() {
+        return new ResponseEntity<>(this.sampleService.get(), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/samples/{username}")
     public ResponseEntity<List<Sample>> getSamplesByUsername(@PathVariable String username) {
         return new ResponseEntity<>(this.sampleService.getSamplesByUsername(username), HttpStatus.OK);

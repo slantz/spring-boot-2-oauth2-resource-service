@@ -68,7 +68,7 @@ public class Sample {
         this.currency = currency;
     }
 
-    public void setSpenderUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -78,5 +78,16 @@ public class Sample {
 
     public void setExpiredDate(Date expiredDate) {
         this.expiredDate = expiredDate;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Sample[id=%s, title='%s', currency='%s', date='%s', expiredDate='%s', username='%s']",
+                             this.id,
+                             this.title,
+                             this.currency.toString(),
+                             this.date.toString(),
+                             this.expiredDate.toString(),
+                             this.username);
     }
 }

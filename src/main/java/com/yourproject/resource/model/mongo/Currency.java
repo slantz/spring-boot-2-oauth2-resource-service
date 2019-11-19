@@ -43,4 +43,12 @@ public class Currency {
     public String getCode() {
         return this.code;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Currency[id=%s, code='%s', symbol='%s']",
+                             this.id,
+                             this.code,
+                             this.symbol);
+    }
 }

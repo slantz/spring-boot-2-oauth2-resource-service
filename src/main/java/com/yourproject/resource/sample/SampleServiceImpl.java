@@ -2,6 +2,7 @@ package com.yourproject.resource.sample;
 
 import com.yourproject.resource.currency.CurrencyService;
 import com.yourproject.resource.error.MissingDbModelInstanceException;
+import com.yourproject.resource.error.MissingDbRefException;
 import com.yourproject.resource.model.adjust.Authority;
 import com.yourproject.resource.model.mongo.Currency;
 import com.yourproject.resource.model.mongo.Sample;
@@ -83,12 +84,39 @@ public class SampleServiceImpl implements SampleService {
 
     @Override
     public List<Sample> create(List<Sample> samples) {
+        validateSamples(samples);
+        return this.sampleRepository.saveAll(samples);
+    }
+
+    @Override
+    public List<Sample> create(List<Sample> samples, String username) {
+        validateSamples(samples);
+        updateSamplesWithUsername(samples, username);
         return this.sampleRepository.saveAll(samples);
     }
 
     @Override
     public List<Sample> get() {
         return this.sampleRepository.findAll();
+    }
+
+    private void updateSamplesWithUsername(List<Sample> newSamples, String username) {
+        newSamples.forEach(sample -> sample.setUsername(username));
+    }
+
+    private void validateSamples(List<Sample> newSamples) {
+        newSamples.forEach(sample -> {
+
+            Currency currency = sample.getCurrency();
+
+            if (currency == null) {
+                throw new MissingDbRefException("Some currency not passed");
+            }
+
+            Currency existingCurrency = getExistingCurrency(currency);
+
+            sample.setCurrency(existingCurrency);
+        });
     }
 
     private Currency getExistingCurrency(Currency currency) {

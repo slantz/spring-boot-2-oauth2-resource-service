@@ -24,5 +24,7 @@ public interface SampleService {
 
     List<Sample> create(List<Sample> samples);
 
+    List<Sample> create(List<Sample> samples, String username);
+
     List<Sample> get();
 }
