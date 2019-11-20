@@ -31,13 +31,13 @@ public final class TestUtil {
     }
 
     public static Currency getCurrency(String title) {
-        Currency uah = new Currency("UAH", "₴");
+        Currency uah = new Currency("EUR", "€");
         uah.setId(CURRENCY_UAH_ID);
 
         Currency usd = new Currency("USD", "$");
         uah.setId(CURRENCY_USD_ID);
 
-        Map<String, Currency> currencies = Map.of("UAH", uah, "USD", usd);
+        Map<String, Currency> currencies = Map.of("EUR", uah, "USD", usd);
         return currencies.get(title);
     }
 

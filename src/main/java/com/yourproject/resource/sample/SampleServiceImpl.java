@@ -77,8 +77,7 @@ public class SampleServiceImpl implements SampleService {
                 .exchange(this.authServiceApiUrl + "/users/username/" + username + "/authorities",
                           HttpMethod.GET,
                           null,
-                          new ParameterizedTypeReference<List<Authority>>() {
-                          })
+                          new ParameterizedTypeReference<List<Authority>>() {})
                 .getBody();
     }
 
