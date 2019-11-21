@@ -16,6 +16,7 @@ public class Sample {
     private String id;
 
     @JsonProperty
+    @Indexed(unique = true)
     private String title;
 
     @DBRef
