@@ -3,8 +3,8 @@ package com.yourproject.resource.sample;
 import com.yourproject.resource.currency.CurrencyService;
 import com.yourproject.resource.model.adjust.Authority;
 import com.yourproject.resource.model.mongo.Currency;
+import com.yourproject.resource.model.mongo.Sample;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -18,12 +18,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.TimeZone;
 
 import static org.hamcrest.Matchers.is;
@@ -35,15 +37,22 @@ import static org.junit.Assert.assertThat;
 })
 public class SampleServiceImplTest {
 
-    private static final String CURRENCY_CODE = "USD";
+    private static final Currency CURRENCY = new Currency("USD", "symbol");
+    private static final String SAMPLE_TITLE = "title";
     private static final String START_DATE_STRING = "2019-04-02T00:00:00.000Z";
     private static final String END_DATE_STRING = "2019-04-30T23:59:59.999Z";
     private static Date START_DATE;
     private static Date END_DATE;
     private static final String USERNAME = "MARIO";
-    private static final String NOT_EXISTING_USERNAME = "PISTON";
+    private static final String NOT_EXISTING_USERNAME = "SOMEUSER";
 
-    private static final String ERROR_AUTHORIZATION_SERVICE_RESPONSE = "{\"error\": \"insufficient_scope\",\"error_description\": \"Insufficient scope for this resource\",\"scope\": \"SPRING_BOOT_RESOURCE_SERVICE\"}";
+    private static final String ERROR_AUTHORIZATION_SERVICE_RESPONSE = "{\n" +
+            "    \"timestamp\": \"2019-11-21T14:31:16.714+0000\",\n" +
+            "    \"status\": 500,\n" +
+            "    \"error\": \"Internal Server Error\",\n" +
+            "    \"message\": \"401 null\",\n" +
+            "    \"path\": \"/resource-services/admin/super-endpoint/" + NOT_EXISTING_USERNAME + "/authorities\"\n" +
+            "}";
 
     private static final TimeZone TIMEZONE_UTC = TimeZone.getTimeZone("UTC");
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -77,36 +86,24 @@ public class SampleServiceImplTest {
         START_DATE = DATE_FORMAT.parse(START_DATE_STRING);
         END_DATE = DATE_FORMAT.parse(END_DATE_STRING);
         mockDefaultCurrencyRest();
+        mockCurrencyService();
+        mockSampleRepositoryFindByUsername(USERNAME);
     }
 
     @Test
     public void getSamplesByUsername() {
-    }
+        List<Sample> samples = this.sampleService.getSamplesByUsername(USERNAME);
 
-    @Test
-    public void getSamplesByUsernameAndPreciseDate() {
-    }
-
-    @Test
-    public void getSamplesByInclusiveDateRangeAndUsername() {
-    }
-
-    @Test
-    public void getSamplesByOverlappingDateRangeAndUsername() {
-    }
-
-    @Test
-    public void getSamplesByTitle() {
-    }
-
-    @Test
-    public void getSamplesByUsernameAndDateAndCurrencyCode() {
+        assertThat(samples.size(), is(1));
+        assertThat(samples.get(0).getTitle(), is(SAMPLE_TITLE));
+        assertThat(samples.get(0).getCurrency(), is(CURRENCY));
+        assertThat(samples.get(0).getDate(), is(START_DATE));
+        assertThat(samples.get(0).getExpiredDate(), is(END_DATE));
+        assertThat(samples.get(0).getUsername(), is(USERNAME));
     }
 
     @Test
     public void getUsernameAuthorities() {
-        mockCurrencyService(CURRENCY_CODE);
-
         List<Authority> authorities = this.sampleService.getUsernameAuthorities(USERNAME);
 
         assertThat(authorities.size(), is(2));
@@ -114,22 +111,16 @@ public class SampleServiceImplTest {
         assertThat(authorities.get(1).getAuthority(), is("GUEST"));
     }
 
-    @Test
-    @Ignore
+    @Test(expected = HttpClientErrorException.class)
     public void getAuthoritiesExceptionAuthService() {
         mockAuthorizationError();
+        this.sampleService.getUsernameAuthorities(NOT_EXISTING_USERNAME);
     }
 
-    @Test
-    public void create() {
-    }
-
-    @Test
-    public void create1() {
-    }
-
-    @Test
-    public void get() {
+    private void mockSampleRepositoryFindByUsername(String username) {
+        Mockito
+                .when(this.sampleRepository.findByUsername(username))
+                .thenReturn(Optional.of(List.of(new Sample(SAMPLE_TITLE, CURRENCY, START_DATE, END_DATE, USERNAME))));
     }
 
     private void mockDefaultCurrencyRest() {
@@ -141,12 +132,12 @@ public class SampleServiceImplTest {
     private void mockAuthorizationError() {
         Mockito
                 .when(this.restTemplate.exchange("http://localhost/auth/users/username/" + NOT_EXISTING_USERNAME + "/authorities", HttpMethod.GET, null, new ParameterizedTypeReference<List<Authority>>() {}))
-                .thenThrow(new Throwable(ERROR_AUTHORIZATION_SERVICE_RESPONSE));
+                .thenThrow(new HttpClientErrorException(HttpStatus.UNAUTHORIZED, ERROR_AUTHORIZATION_SERVICE_RESPONSE));
     }
 
-    private void mockCurrencyService(String currencyCode) {
+    private void mockCurrencyService() {
         Mockito
-                .when(this.currencyService.getByCode(currencyCode))
-                .thenReturn(new Currency(currencyCode, "symbol"));
+                .when(this.currencyService.getByCode(CURRENCY.getCode()))
+                .thenReturn(CURRENCY);
     }
 }

@@ -48,6 +48,10 @@ public class Sample {
         return this.id;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     public Currency getCurrency() {
         return this.currency;
     }
@@ -60,16 +64,20 @@ public class Sample {
         return this.expiredDate;
     }
 
+    public String getUsername() {
+        return this.username;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     public void setDate(Date date) {
@@ -78,6 +86,10 @@ public class Sample {
 
     public void setExpiredDate(Date expiredDate) {
         this.expiredDate = expiredDate;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
