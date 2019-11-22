@@ -4,6 +4,7 @@ import com.yourproject.resource.currency.CurrencyServiceImpl;
 import com.yourproject.resource.model.mongo.Currency;
 import com.yourproject.resource.model.mongo.Sample;
 import com.yourproject.resource.sample.SampleServiceImpl;
+import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -12,7 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-final class DELETEME__dummyObjectsToDb {
+@Component
+public class DELETEME__dummyObjectsToDb {
 
     private static final String ADMIN = "admin";
     private static final String GUEST = "guest";
@@ -24,7 +26,7 @@ final class DELETEME__dummyObjectsToDb {
         DATE_FORMAT.setTimeZone(TIMEZONE_UTC);
     }
 
-    static void createObjects(CurrencyServiceImpl currencyService, SampleServiceImpl sampleService) {
+    public void createObjects(CurrencyServiceImpl currencyService, SampleServiceImpl sampleService) {
         Currency USD = new Currency("USD", "$");
         Currency EUR = new Currency("EUR", "€");
 

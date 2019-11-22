@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyString;
 
@@ -28,6 +29,10 @@ public final class TestUtil {
 
     public static ResultMatcher getMatcherForHasItems(String jsonPath, String... expected) {
         return MockMvcResultMatchers.jsonPath(jsonPath, hasItems(expected));
+    }
+
+    public static ResultMatcher getMatcherForHasSize(String jsonPath, int size) {
+        return MockMvcResultMatchers.jsonPath(jsonPath, hasSize(size));
     }
 
     public static Currency getCurrency(String title) {

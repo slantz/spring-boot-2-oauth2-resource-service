@@ -40,11 +40,11 @@ public class SampleController {
      */
     @GetMapping(path = "/samples")
     public ResponseEntity<List<Sample>> getSamples(Principal principal,
-                                             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date startDate,
-                                             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date endDate,
-                                             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date date,
-                                             @RequestParam(required = false) String title,
-                                             @RequestParam(required = false) String currencyCode) {
+                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date startDate,
+                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date endDate,
+                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date date,
+                                                   @RequestParam(required = false) String title,
+                                                   @RequestParam(required = false) String currencyCode) {
 
         String username = principal.getName();
 

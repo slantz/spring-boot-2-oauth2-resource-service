@@ -1,7 +1,6 @@
 package com.yourproject.resource.model.mongo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -11,7 +10,6 @@ import java.util.Date;
 
 public class Sample {
     @Id
-    @JsonIgnore
     @JsonProperty
     private String id;
 

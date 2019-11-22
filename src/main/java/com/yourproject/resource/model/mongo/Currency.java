@@ -1,5 +1,6 @@
 package com.yourproject.resource.model.mongo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -9,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Currency {
 
     @Id
-//    @JsonIgnore
+    @JsonIgnore
     @JsonProperty
     private String id;
 

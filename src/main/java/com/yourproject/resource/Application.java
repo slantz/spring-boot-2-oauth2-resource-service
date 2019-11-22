@@ -2,6 +2,7 @@ package com.yourproject.resource;
 
 import com.yourproject.resource.currency.CurrencyServiceImpl;
 import com.yourproject.resource.sample.SampleServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,9 @@ import java.util.Arrays;
 @EnableOAuth2Client
 public class Application implements CommandLineRunner {
 
+	@Autowired
+	private DELETEME__dummyObjectsToDb deleteme__dummyObjectsToDb;
+
 	@Bean
 	@ConfigurationProperties("security.oauth2.client")
 	protected ClientCredentialsResourceDetails oAuthDetails() {
@@ -35,7 +39,7 @@ public class Application implements CommandLineRunner {
 
 	@Bean
 	CommandLineRunner init(CurrencyServiceImpl currencyService, SampleServiceImpl sampleService) {
-		return (evt) -> DELETEME__dummyObjectsToDb.createObjects(currencyService, sampleService);
+		return (evt) -> deleteme__dummyObjectsToDb.createObjects(currencyService, sampleService);
 	}
 
 	@Override
