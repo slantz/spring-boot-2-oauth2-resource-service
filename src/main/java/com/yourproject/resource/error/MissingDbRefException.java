@@ -1,5 +1,8 @@
 package com.yourproject.resource.error;
 
+/**
+ * Runtime exception for missing DB reference.
+ */
 public class MissingDbRefException extends RuntimeException {
 
     private final String s;

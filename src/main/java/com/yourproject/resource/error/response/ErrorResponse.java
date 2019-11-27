@@ -2,6 +2,9 @@ package com.yourproject.resource.error.response;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * Error response used in {@link com.yourproject.resource.advice.RestApiControllerAdvice}.
+ */
 public class ErrorResponse {
     private final HttpStatus status;
     private final String message;

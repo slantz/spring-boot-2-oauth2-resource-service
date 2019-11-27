@@ -20,6 +20,11 @@ import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Rest controller introducing CRUD actions for working with {@link Sample}.
+ *
+ * Requires authority USER by default thus restricting access to endpoints for public calls.
+ */
 @RestController
 @RequestMapping(path = "/super-endpoint")
 @PreAuthorize(AuthorizationGrant.AUTHORITY_USER)
@@ -35,8 +40,17 @@ public class SampleController {
      *
      * Username is decrypted from JWT and is stored in {@link java.security.Principal}.
      *
+     * Gets {@link Sample}s by title, precise date, combination of start and end dates and additional filtering by {@link com.yourproject.resource.model.mongo.Currency} code.
+     * If no query parameters are set returns all the {@link Sample}s for current user.
      *
-     * @return
+     * @param principal {@link Principal} containing username decrypted from JWT.
+     * @param startDate start date to search for {@link Sample}.
+     * @param endDate end date to search for {@link Sample}.
+     * @param date as of date to search {@link Sample} only for this date.
+     * @param title {@link Sample} title.
+     * @param currencyCode search {@link Sample} by {@link com.yourproject.resource.model.mongo.Currency} code.
+     *
+     * @return {@link ResponseEntity} with list of {@link Sample} from the DB satisfying the search options for current user.
      */
     @GetMapping(path = "/samples")
     public ResponseEntity<List<Sample>> getSamples(Principal principal,
@@ -67,6 +81,13 @@ public class SampleController {
         return new ResponseEntity<>(this.sampleService.getSamplesByUsername(username), HttpStatus.OK);
     }
 
+    /**
+     * Create new samples and store those in DB.
+     *
+     * @param principal {@link Principal} containing username decrypted from JWT.
+     * @param samples list of {@link Sample} to be created.
+     * @return {@link ResponseEntity} with list of {@link Sample} from the DB with ids set for current user.
+     */
     @PostMapping(path = "/samples")
     public ResponseEntity<List<Sample>> createSamples(Principal principal, @RequestBody List<Sample> samples) {
         return new ResponseEntity<>(this.sampleService.create(samples, principal.getName()), HttpStatus.OK);

@@ -26,7 +26,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 /**
- * https://spring.io/guides/tutorials/bookmarks/
+ * Util controller advice class for handling exceptions and converting those to expected error responses.
  */
 @ControllerAdvice
 class RestApiControllerAdvice {

@@ -13,6 +13,12 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
+/**
+ * Configuration describing resource server.
+ *
+ * Adds basic HTTP web security to authenticate service and enables a Spring Security filter that authenticates requests
+ * via an incoming OAuth2 token.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableResourceServer

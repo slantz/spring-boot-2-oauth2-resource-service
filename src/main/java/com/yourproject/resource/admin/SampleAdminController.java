@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * This is the controller for super-endpoint for admin users only.
+ *
+ * Requires authority ADMIN by default thus restricting access to endpoints for public calls
+ * and regular users without administrator privileges.
+ */
 @RestController
 @RequestMapping(path = "/admin/super-endpoint")
 @PreAuthorize(AuthorizationGrant.AUTHORITY_ADMIN)

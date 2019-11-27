@@ -8,6 +8,9 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.Date;
 
+/**
+ * Sample MongoDb document.
+ */
 public class Sample {
     @Id
     @JsonProperty

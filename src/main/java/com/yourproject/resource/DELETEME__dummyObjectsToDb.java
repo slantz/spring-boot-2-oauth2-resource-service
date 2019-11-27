@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+/**
+ * DEMO dummy component to fill DB with some {@link Currency}s and {@link Sample}s.
+ */
 @Component
 public class DELETEME__dummyObjectsToDb {
 

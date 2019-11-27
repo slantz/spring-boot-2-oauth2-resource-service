@@ -15,6 +15,13 @@ import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
 
+/**
+ * Configuration for JWT.
+ *
+ * Introduces:
+ *  - token store.
+ *  - reads public RSA key for the service and adds it to the JWT converter.
+ */
 @Configuration
 public class JwtConfiguration {
 

@@ -1,5 +1,8 @@
 package com.yourproject.resource.error;
 
+/**
+ * Runtime exception for missing DB model instance.
+ */
 public class MissingDbModelInstanceException extends RuntimeException {
 
     private final String s;

@@ -8,15 +8,17 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
 
 /**
- * WTF is this?
+ * Method security configuration.
  *
  * @EnableResourceServer adds ability to check the OAuth2 tokens.
- * @EnableGlobalMethodSecurity(prePostEnabled = true) makes sure that @PreAuthorize annotation works.
+ *      Underneath creates WebSecurityConfigurerAdapter with Order(3).
+ *
+ * @EnableGlobalMethodSecurity(prePostEnabled = true) makes sure that @PreAuthorize annotation on controller methods works.
  *
  * It's important that these 2 annotations come together on this config for #oauth2.hasScope to work or else just hasAuthority() will work.
  */
 @Configuration
-@EnableResourceServer // creates WebSecurityConfigurerAdapter with Order(3)
+@EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
