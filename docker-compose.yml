@@ -1,0 +1,58 @@
+version: "3.0"
+
+services:
+  spring-boot-resource-service:
+    build:
+      context: .
+      args:
+        JAR_FILE: ./build/libs/spring-boot-resource-service-1.0.0-SNAPSHOT.jar
+    image: your-docker-repo/spring-boot-resource-service
+    ports:
+      - 8080:8080
+      - 8081:8081
+    environment:
+      - spring.data.mongodb.host=mongo
+      - spring.data.mongodb.port=27017
+      - spring.data.mongodb.database=resource
+      - rest.api.auth-service-path=http://auth-service:9999
+      - security.oauth2.client.access-token-uri=http://auth-service:9999/oauth/token
+    links:
+      - mongo
+      - auth-service
+    depends_on:
+      - mongo
+      - auth-service
+    labels:
+      - sb2o.spring-boot-resource-service
+
+  auth-service:
+    image: your-docker-repo/spring-boot-auth-service:latest
+    ports:
+      - 9999:9999
+      - 8082:8081
+    environment:
+       - spring.data.mongodb.host=mongo
+       - spring.data.mongodb.port=27017
+       - spring.data.mongodb.database=auth
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    labels:
+      - sb2o.spring-boot-auth-service
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db/mongo/:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=auth
+    labels:
+      - sb2o.mongo
+
+networks:
+  default:
+    external:
+      name: spring_boot_2_oauth2_default_network
