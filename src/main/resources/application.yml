@@ -18,11 +18,11 @@ security:
       client-id: spring_boot_resource_service
       client-secret: 222
       grant-type: client_credentials
-      access-token-uri: http://<YOUR_IP>:9999/oauth/token
+      access-token-uri: http://localhost:9999/oauth/token
 
 rest:
   api:
-    auth-service-path: http://<YOUR_IP>:9999
+    auth-service-path: http://localhost:9999
 
 management:
   server:

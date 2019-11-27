@@ -79,14 +79,381 @@ Two API sections described here: for regular user and for admininstrator one, se
 The path `/super-endpoint` is secured for any non-authenticated user and requires regular USER authority.
 
 #### GET /super-endpoint/samples
+
+##### Request (AUTHORITY: USER, USERNAME: GUEST)
+
+##### Authorization token
+curl -X POST -vu web:111 -H "Accept: application/json" "http://authorization-service:9999/oauth/token" -d "grant_type=password&username=guest&password=guest" | jq .
+
+##### Response (AUTHORITY: USER, USERNAME: GUEST)
+```
+@GET https://resource-service:8080/resource-services/super-endpoint/samples
+```
+
+```
+[
+    {
+        "id": "5dd7ce793ceeab156f747704",
+        "title": "and",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-01-01T00:00:00.000Z",
+        "expiredDate": "2019-02-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747705",
+        "title": "fulfills",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-02-01T00:00:00.000Z",
+        "expiredDate": "2019-03-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747706",
+        "title": "database",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-03-01T00:00:00.000Z",
+        "expiredDate": "2019-04-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747707",
+        "title": "with",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-04-01T00:00:00.000Z",
+        "expiredDate": "2019-05-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747708",
+        "title": "data",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-05-01T00:00:00.000Z",
+        "expiredDate": "2019-06-01T00:00:00.000Z",
+        "username": "guest"
+    }
+]
+```
+
 #### POST /super-endpoint/samples
+
+##### Request (AUTHORITY: ADMIN, USERNAME: ADMIN)
+```
+@POST https://resource-service:8080/resource-services/super-endpoint/samples
+```
+
+```
+[
+  {
+    "title": "new-sample-item",
+    "currency": {
+      "id": "5dd7ce793ceeab156f7476fc",
+      "code": "EUR",
+      "symbol": "€"
+    },
+    "date": "2019-11-01T00:00:00.000Z",
+    "expiredDate": "2019-11-30T00:00:00.000Z"
+  }
+]
+```
+##### Response (AUTHORITY: ADMIN, USERNAME: ADMIN)
+```
+[
+    {
+        "id": "5dde96517d20a610e1ebb091",
+        "title": "new-sample-item",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-11-01T00:00:00.000Z",
+        "expiredDate": "2019-11-30T00:00:00.000Z",
+        "username": "admin"
+    }
+]
+```
 
 ### Admin endpoints
 The path `/admin/super-endpoint` is restricted only to users with ADMIN authority.
 
 #### GET /admin/super-endpoint/samples
+
+##### Request (AUTHORITY: ADMIN, USERNAME: ADMIN)
+```
+@GET https://resource-service:8080/resource-services/admin/super-endpoint/samples
+```
+
+##### Response (AUTHORITY: ADMIN, USERNAME: ADMIN)
+```
+[
+    {
+        "id": "5dd7ce793ceeab156f7476fd",
+        "title": "super",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-01-01T00:00:00.000Z",
+        "expiredDate": "2019-02-01T00:00:00.000Z",
+        "username": "admin"
+    },
+    {
+        "id": "5dd7ce793ceeab156f7476fe",
+        "title": "title",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-01-01T00:00:00.000Z",
+        "expiredDate": "2019-02-01T00:00:00.000Z",
+        "username": "admin"
+    },
+    {
+        "id": "5dd7ce793ceeab156f7476ff",
+        "title": "that",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-02-01T00:00:00.000Z",
+        "expiredDate": "2019-03-01T00:00:00.000Z",
+        "username": "admin"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747700",
+        "title": "describes",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-03-01T00:00:00.000Z",
+        "expiredDate": "2019-04-01T00:00:00.000Z",
+        "username": "admin"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747701",
+        "title": "this",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-03-01T00:00:00.000Z",
+        "expiredDate": "2019-04-01T00:00:00.000Z",
+        "username": "admin"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747702",
+        "title": "random",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-04-01T00:00:00.000Z",
+        "expiredDate": "2019-05-01T00:00:00.000Z",
+        "username": "admin"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747703",
+        "title": "model",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-05-01T00:00:00.000Z",
+        "expiredDate": "2019-06-01T00:00:00.000Z",
+        "username": "admin"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747704",
+        "title": "and",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-01-01T00:00:00.000Z",
+        "expiredDate": "2019-02-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747705",
+        "title": "fulfills",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-02-01T00:00:00.000Z",
+        "expiredDate": "2019-03-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747706",
+        "title": "database",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-03-01T00:00:00.000Z",
+        "expiredDate": "2019-04-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747707",
+        "title": "with",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-04-01T00:00:00.000Z",
+        "expiredDate": "2019-05-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747708",
+        "title": "data",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-05-01T00:00:00.000Z",
+        "expiredDate": "2019-06-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dde96517d20a610e1ebb091",
+        "title": "new-sample-item",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-11-01T00:00:00.000Z",
+        "expiredDate": "2019-11-30T00:00:00.000Z",
+        "username": "admin"
+    }
+]
+```
+
 #### GET /admin/super-endpoint/samples/{username}
+
+##### Request (AUTHORITY: ADMIN, USERNAME: ADMIN)
+```
+@GET https://resource-service:8080/resource-services/admin/super-endpoint/samples/guest
+```
+
+##### Response (AUTHORITY: ADMIN, USERNAME: ADMIN)
+```
+[
+    {
+        "id": "5dd7ce793ceeab156f747704",
+        "title": "and",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-01-01T00:00:00.000Z",
+        "expiredDate": "2019-02-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747705",
+        "title": "fulfills",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-02-01T00:00:00.000Z",
+        "expiredDate": "2019-03-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747706",
+        "title": "database",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fb",
+            "code": "USD",
+            "symbol": "$"
+        },
+        "date": "2019-03-01T00:00:00.000Z",
+        "expiredDate": "2019-04-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747707",
+        "title": "with",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-04-01T00:00:00.000Z",
+        "expiredDate": "2019-05-01T00:00:00.000Z",
+        "username": "guest"
+    },
+    {
+        "id": "5dd7ce793ceeab156f747708",
+        "title": "data",
+        "currency": {
+            "id": "5dd7ce793ceeab156f7476fc",
+            "code": "EUR",
+            "symbol": "€"
+        },
+        "date": "2019-05-01T00:00:00.000Z",
+        "expiredDate": "2019-06-01T00:00:00.000Z",
+        "username": "guest"
+    }
+]
+```
+
 #### GET /admin/super-endpoint/{username}/authorities
+
+##### Request (AUTHORITY: ADMIN, USERNAME: ADMIN)
+```
+@GET https://resource-service:8080/resource-services/admin/super-endpoint/guest/authorities
+```
+
+##### Response (AUTHORITY: ADMIN, USERNAME: ADMIN)
+```
+[
+    {
+        "authority": "USER"
+    }
+]
+```
 
 ## Useful links
 
@@ -107,12 +474,10 @@ The path `/admin/super-endpoint` is restricted only to users with ADMIN authorit
 
 ## Description how it works
 
-1. sign in as application or other stuff with clientId and clientSecret
-2. sign in as user via grant_type=password username and password
-3. use sign in token to get user info from /users/me
-4. use sign in token to get resource service endpoints received with grant_type=client_credentials to reach non-user specific endpoints
-5. use sign in token to get resource service endpoints received with grant_type=password to reach user specific endpoints,
-get username from OAuth2 token and filter resource service data from DBs bu username, not user id to match Spring Security UserDetails interface.
+1. application signs in itself with clientId and clientSecret as a client with client_credentials.
+2. user signs in as user via grant_type=password username and password
+3. use sign in token to get user info from /sample-endpoint
+4. sign in as admin to get info from /admin/sample-endpoint
 
 ## Useful notes
 
