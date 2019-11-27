@@ -80,15 +80,15 @@ The path `/super-endpoint` is secured for any non-authenticated user and require
 
 #### GET /super-endpoint/samples
 
-##### Request (AUTHORITY: USER, USERNAME: GUEST)
-
 ##### Authorization token
 curl -X POST -vu web:111 -H "Accept: application/json" "http://authorization-service:9999/oauth/token" -d "grant_type=password&username=guest&password=guest" | jq .
 
-##### Response (AUTHORITY: USER, USERNAME: GUEST)
+##### Request (AUTHORITY: USER, USERNAME: GUEST)
 ```
 @GET https://resource-service:8080/resource-services/super-endpoint/samples
 ```
+
+##### Response (AUTHORITY: USER, USERNAME: GUEST)
 
 ```
 [
@@ -156,6 +156,9 @@ curl -X POST -vu web:111 -H "Accept: application/json" "http://authorization-ser
 ```
 
 #### POST /super-endpoint/samples
+
+##### Authorization token
+curl -X POST -vu web:111 -H "Accept: application/json" "http://authorization-service:9999/oauth/token" -d "grant_type=password&username=admin&password=admin" | jq .
 
 ##### Request (AUTHORITY: ADMIN, USERNAME: ADMIN)
 ```
@@ -474,10 +477,12 @@ The path `/admin/super-endpoint` is restricted only to users with ADMIN authorit
 
 ## Description how it works
 
-1. application signs in itself with clientId and clientSecret as a client with client_credentials.
+1. application signs in itself with clientId and clientSecret as a client with grant_type=client_credentials.
 2. user signs in as user via grant_type=password username and password
 3. use sign in token to get user info from /sample-endpoint
 4. sign in as admin to get info from /admin/sample-endpoint
+5. resource service can get authorization service's specific endpoints restricted by the scope SPRING_BOOT_RESOURCE_SERVICE via @PreAuthorize annotation.
+6. users can access endpoints in resource service considering the authorities of users and endpoints restrictions via @PreAuthorize.
 
 ## Useful notes
 
