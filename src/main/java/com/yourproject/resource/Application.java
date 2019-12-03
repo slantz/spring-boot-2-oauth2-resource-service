@@ -6,12 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * Sample Spring Boot Resource server.
@@ -31,27 +26,10 @@ import org.springframework.web.client.RestTemplate;
  * curl -G -H "Authorization: Bearer <oauth_token>" "http://localhost:8080/resource-services/samples" | jq .
  */
 @SpringBootApplication
-@EnableOAuth2Client
 public class Application implements CommandLineRunner {
 
 	@Autowired
 	private DELETEME__dummyObjectsToDb deleteme__dummyObjectsToDb;
-
-    /**
-     * Bean for authenticating resource service to be able to call the authoriation service.
-     *
-     * @return bean with client credentials.
-     */
-	@Bean
-	@ConfigurationProperties("security.oauth2.client")
-	protected ClientCredentialsResourceDetails oAuthDetails() {
-		return new ClientCredentialsResourceDetails();
-	}
-
-	@Bean
-	protected RestTemplate restTemplate() {
-		return new OAuth2RestTemplate(oAuthDetails());
-	}
 
     /**
      * TODO: remove this method, for DEMO purposes only.
@@ -67,7 +45,8 @@ public class Application implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) {}
+	public void run(String... args) {
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
