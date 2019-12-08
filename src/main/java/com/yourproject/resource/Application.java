@@ -1,6 +1,7 @@
 package com.yourproject.resource;
 
 import com.yourproject.resource.currency.CurrencyServiceImpl;
+import com.yourproject.resource.sample.Sample;
 import com.yourproject.resource.sample.SampleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,9 +17,9 @@ import org.springframework.context.annotation.Bean;
  *
  * It gets the list of {@link com.yourproject.resource.model.adjust.Authority} from the Authorization service for current user.
  *
- * Stores and gets {@link com.yourproject.resource.model.mongo.Sample}s.
+ * Stores and gets {@link Sample}s.
  *
- * Provides ADMIN authority functionality API for administrator users to manipulate {@link com.yourproject.resource.model.mongo.Sample} for any user.
+ * Provides ADMIN authority functionality API for administrator users to manipulate {@link Sample} for any user.
  *
  * Sample communication to this resource service.
  *

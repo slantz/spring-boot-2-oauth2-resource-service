@@ -1,6 +1,5 @@
 package com.yourproject.resource.currency;
 
-import com.yourproject.resource.model.mongo.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

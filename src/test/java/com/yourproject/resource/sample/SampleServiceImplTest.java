@@ -2,8 +2,7 @@ package com.yourproject.resource.sample;
 
 import com.yourproject.resource.currency.CurrencyService;
 import com.yourproject.resource.model.adjust.Authority;
-import com.yourproject.resource.model.mongo.Currency;
-import com.yourproject.resource.model.mongo.Sample;
+import com.yourproject.resource.currency.Currency;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

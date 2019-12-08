@@ -1,6 +1,5 @@
 package com.yourproject.resource.currency;
 
-import com.yourproject.resource.model.mongo.Currency;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

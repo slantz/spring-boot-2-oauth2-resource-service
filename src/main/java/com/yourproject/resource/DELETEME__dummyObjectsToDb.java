@@ -1,8 +1,8 @@
 package com.yourproject.resource;
 
 import com.yourproject.resource.currency.CurrencyServiceImpl;
-import com.yourproject.resource.model.mongo.Currency;
-import com.yourproject.resource.model.mongo.Sample;
+import com.yourproject.resource.currency.Currency;
+import com.yourproject.resource.sample.Sample;
 import com.yourproject.resource.sample.SampleServiceImpl;
 import org.springframework.stereotype.Component;
 

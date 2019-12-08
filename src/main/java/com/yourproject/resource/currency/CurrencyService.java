@@ -1,7 +1,5 @@
 package com.yourproject.resource.currency;
 
-import com.yourproject.resource.model.mongo.Currency;
-
 import java.util.List;
 
 /**

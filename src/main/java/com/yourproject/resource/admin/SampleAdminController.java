@@ -2,7 +2,7 @@ package com.yourproject.resource.admin;
 
 import com.yourproject.resource.constant.AuthorizationGrant;
 import com.yourproject.resource.model.adjust.Authority;
-import com.yourproject.resource.model.mongo.Sample;
+import com.yourproject.resource.sample.Sample;
 import com.yourproject.resource.sample.SampleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

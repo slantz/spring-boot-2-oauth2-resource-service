@@ -1,4 +1,4 @@
-package com.yourproject.resource.model.mongo;
+package com.yourproject.resource.currency;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

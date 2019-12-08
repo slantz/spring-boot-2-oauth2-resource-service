@@ -1,7 +1,8 @@
-package com.yourproject.resource.model.mongo;
+package com.yourproject.resource.sample;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yourproject.resource.currency.Currency;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;

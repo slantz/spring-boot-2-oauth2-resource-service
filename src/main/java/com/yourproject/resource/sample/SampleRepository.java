@@ -1,6 +1,5 @@
 package com.yourproject.resource.sample;
 
-import com.yourproject.resource.model.mongo.Sample;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

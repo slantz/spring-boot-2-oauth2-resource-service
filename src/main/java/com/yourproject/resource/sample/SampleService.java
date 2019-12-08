@@ -1,7 +1,7 @@
 package com.yourproject.resource.sample;
 
+import com.yourproject.resource.currency.Currency;
 import com.yourproject.resource.model.adjust.Authority;
-import com.yourproject.resource.model.mongo.Sample;
 
 import java.util.Date;
 import java.util.List;
@@ -68,9 +68,9 @@ public interface SampleService {
      * @param username username.
      * @param startDate start date of the interval.
      * @param expiredDate end date of the interval.
-     * @param currencyCode {@link com.yourproject.resource.model.mongo.Currency} code.
+     * @param currencyCode {@link Currency} code.
      *
-     * @return list of {@link Sample} for current user filtered by overlapping date interval and {@link com.yourproject.resource.model.mongo.Currency} code.
+     * @return list of {@link Sample} for current user filtered by overlapping date interval and {@link Currency} code.
      */
     List<Sample> getSamplesByUsernameAndDateAndCurrencyCode(String username, Date startDate, Date expiredDate, String currencyCode);
 

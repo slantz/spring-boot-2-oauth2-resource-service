@@ -1,6 +1,6 @@
 package com.yourproject.resource.sample;
 
-import com.yourproject.resource.model.mongo.Sample;
+import com.yourproject.resource.currency.Currency;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +16,7 @@ public interface SampleCustomRepository {
      * @param username username.
      * @param startDate start date interval.
      * @param endDate end date interval.
-     * @param currencyCode {@link com.yourproject.resource.model.mongo.Currency} code.
+     * @param currencyCode {@link Currency} code.
      *
      * @return list of {@link Sample} satisfying filter criteria.
      */

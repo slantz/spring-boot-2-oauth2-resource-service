@@ -1,6 +1,5 @@
 package com.yourproject.resource.sample;
 
-import com.yourproject.resource.model.mongo.Sample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 

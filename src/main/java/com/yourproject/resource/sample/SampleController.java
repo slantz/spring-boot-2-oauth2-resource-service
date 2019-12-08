@@ -1,7 +1,7 @@
 package com.yourproject.resource.sample;
 
 import com.yourproject.resource.constant.AuthorizationGrant;
-import com.yourproject.resource.model.mongo.Sample;
+import com.yourproject.resource.currency.Currency;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class SampleController {
      *
      * Username is decrypted from JWT and is stored in {@link java.security.Principal}.
      *
-     * Gets {@link Sample}s by title, precise date, combination of start and end dates and additional filtering by {@link com.yourproject.resource.model.mongo.Currency} code.
+     * Gets {@link Sample}s by title, precise date, combination of start and end dates and additional filtering by {@link Currency} code.
      * If no query parameters are set returns all the {@link Sample}s for current user.
      *
      * @param principal {@link Principal} containing username decrypted from JWT.
@@ -48,7 +48,7 @@ public class SampleController {
      * @param endDate end date to search for {@link Sample}.
      * @param date as of date to search {@link Sample} only for this date.
      * @param title {@link Sample} title.
-     * @param currencyCode search {@link Sample} by {@link com.yourproject.resource.model.mongo.Currency} code.
+     * @param currencyCode search {@link Sample} by {@link Currency} code.
      *
      * @return {@link ResponseEntity} with list of {@link Sample} from the DB satisfying the search options for current user.
      */
